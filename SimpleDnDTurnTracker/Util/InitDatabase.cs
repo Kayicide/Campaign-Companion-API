@@ -5,7 +5,6 @@ using SimpleDnDTurnTracker.Data;
 
 namespace SimpleDnDTurnTracker.Util
 {
-    // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class InitDatabase
     {
         private readonly RequestDelegate _next;
@@ -22,7 +21,6 @@ namespace SimpleDnDTurnTracker.Util
         }
     }
 
-    // Extension method used to add the middleware to the HTTP request pipeline.
     public static class InitDatabaseExtensions
     {
         public static IApplicationBuilder UseInitDatabase(this IApplicationBuilder app)

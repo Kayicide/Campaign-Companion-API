@@ -2,7 +2,7 @@ using Microsoft.Extensions.Configuration;
 using SimpleDnDTurnTracker.Data;
 using SimpleDnDTurnTracker.Data.Repositories;
 using SimpleDnDTurnTracker.Features;
-using SimpleDnDTurnTracker.Features.Campaign;
+using SimpleDnDTurnTracker.Features.Campaigns;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using System.ComponentModel;
@@ -17,6 +17,7 @@ var container = new Container();
 container.Options.DefaultLifestyle = Lifestyle.Scoped;
 container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 container.Register(typeof(IRequestHandler<,>), typeof(IRequestHandler<,>).Assembly, Lifestyle.Transient);
+container.Register(typeof(IRepository<>), typeof(IRepository<>).Assembly, Lifestyle.Transient);
 
 // Add services to the container.
 builder.Services.AddDbContext<MainContext>(options => options.UseSqlite("Data Source=Application.db;Cache=Shared").EnableSensitiveDataLogging());

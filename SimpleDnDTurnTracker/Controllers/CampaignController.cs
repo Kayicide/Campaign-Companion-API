@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using SimpleDnDTurnTracker.Controllers.HttpRequests;
+using SimpleDnDTurnTracker.Data.Entities;
 using SimpleDnDTurnTracker.Features;
-using SimpleDnDTurnTracker.Features.Campaign;
+using SimpleDnDTurnTracker.Features.Campaigns;
 
 namespace SimpleDnDTurnTracker.Controllers
 {
@@ -8,9 +10,9 @@ namespace SimpleDnDTurnTracker.Controllers
     [Route("[controller]")]
     public class CampaignController : ControllerBase
     {
-        private readonly IRequestHandler<CreateCampaignRequest, bool> _createCampaignRequestHandler;
+        private readonly IRequestHandler<CreateCampaignRequest, Campaign> _createCampaignRequestHandler;
 
-        public CampaignController(IRequestHandler<CreateCampaignRequest, bool> createCampaignRequestHandler)
+        public CampaignController(IRequestHandler<CreateCampaignRequest, Campaign> createCampaignRequestHandler)
         {
             _createCampaignRequestHandler = createCampaignRequestHandler;
         }
@@ -22,10 +24,10 @@ namespace SimpleDnDTurnTracker.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create([FromBody] CreateCampaignHttpRequest createCampaignHttpRequest)
         {
-            var test = await _createCampaignRequestHandler.HandleRequest(new CreateCampaignRequest());
-            return Ok(test);
+            var campaign = await _createCampaignRequestHandler.HandleRequest(new CreateCampaignRequest{Name = createCampaignHttpRequest.Name});
+            return Ok(campaign);
         }
     }
 }

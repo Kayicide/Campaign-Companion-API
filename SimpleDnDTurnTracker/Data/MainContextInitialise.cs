@@ -18,10 +18,8 @@ namespace SimpleDnDTurnTracker.Data
 
             context.Encounters.Add(encounter);
 
-            var campaign = new Campaign
+            var campaign = new Campaign("Campaign Test")
             {
-                Id = new Guid("bc411bef-4623-49cd-b709-2c0aebb38d4b"),
-                Name = "Test Campaign",
                 Encounters = new List<Encounter>
                 {
                     encounter
