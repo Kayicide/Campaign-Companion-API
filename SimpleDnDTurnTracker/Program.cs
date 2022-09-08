@@ -6,6 +6,7 @@ using SimpleDnDTurnTracker.Features.Campaigns;
 using SimpleInjector;
 using SimpleInjector.Lifestyles;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using SimpleDnDTurnTracker.Util;
 using Container = SimpleInjector.Container;
@@ -21,7 +22,8 @@ container.Register(typeof(IRepository<>), typeof(IRepository<>).Assembly, Lifest
 
 // Add services to the container.
 builder.Services.AddDbContext<MainContext>(options => options.UseSqlite("Data Source=Application.db;Cache=Shared").EnableSensitiveDataLogging());
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(x =>
+    x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

@@ -38,8 +38,21 @@ namespace SimpleDnDTurnTracker.Data.Repositories
 
         public async Task<List<Campaign>> GetAll()
         {
-            var campaigns = await _context.Campaigns.ToListAsync();
+            var campaigns = await _context.Campaigns.Include(x => x.Encounters).ToListAsync();
             return campaigns;
+        }
+
+        public async Task<Campaign?> Update(Campaign entity)
+        {
+            var entityToUpdate = await _context.Campaigns.FindAsync(entity.Id);
+            if (entityToUpdate == null)
+                return null;
+
+            entityToUpdate.Name = entity.Name;
+
+            await _context.SaveChangesAsync();
+
+            return entityToUpdate;
         }
     }
 }

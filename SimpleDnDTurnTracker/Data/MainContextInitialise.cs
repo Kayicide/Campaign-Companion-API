@@ -10,10 +10,9 @@ namespace SimpleDnDTurnTracker.Data
             if (context.Characters.Any() || context.Encounters.Any() || context.Campaigns.Any())
                 return;
 
-            var encounter = new Encounter
+            var encounter = new Encounter("Encounter Test")
             {
                 Id = new Guid("bc411bef-4623-49cd-b709-2c0aebb38d5b"),
-                Name = "Encounter Test"
             };
 
             context.Encounters.Add(encounter);
