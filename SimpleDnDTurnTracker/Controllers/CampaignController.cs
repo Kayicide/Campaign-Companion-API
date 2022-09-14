@@ -13,13 +13,16 @@ namespace SimpleDnDTurnTracker.Controllers
         private readonly IRequestHandler<CreateCampaignRequest, Campaign> _createCampaignRequestHandler;
         private readonly IRequestHandler<GetAllCampaignsRequest, List<Campaign>> _getAllCampaignsRequestHandler;
         private readonly IRequestHandler<UpdateCampaignRequest, Campaign> _updateCampaignRequestHandler;
+        private readonly IRequestHandler<GetCampaignsWithUserIdRequest, List<Campaign>> _getCampaignWithUserIdRequestHandler;
         public CampaignController(IRequestHandler<CreateCampaignRequest, Campaign> createCampaignRequestHandler,
                                   IRequestHandler<GetAllCampaignsRequest, List<Campaign>> getAllCampaignsRequestHandler,
-                                  IRequestHandler<UpdateCampaignRequest, Campaign> updateCampaignRequestHandler)
+                                  IRequestHandler<UpdateCampaignRequest, Campaign> updateCampaignRequestHandler,
+                                  IRequestHandler<GetCampaignsWithUserIdRequest, List<Campaign>> getCampaignWithUserIdRequestHandler)
         {
             _createCampaignRequestHandler = createCampaignRequestHandler;
             _getAllCampaignsRequestHandler = getAllCampaignsRequestHandler;
             _updateCampaignRequestHandler = updateCampaignRequestHandler;
+            _getCampaignWithUserIdRequestHandler = getCampaignWithUserIdRequestHandler;
         }
 
         [HttpGet]
@@ -29,10 +32,17 @@ namespace SimpleDnDTurnTracker.Controllers
             return Ok(campaigns);
         }
 
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> Get([FromRoute] string userId)
+        {
+            var campaigns = await _getCampaignWithUserIdRequestHandler.HandleRequest(new GetCampaignsWithUserIdRequest{UserId = userId});
+            return Ok(campaigns);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCampaignHttpRequest createCampaignHttpRequest)
         {
-            var campaign = await _createCampaignRequestHandler.HandleRequest(new CreateCampaignRequest{Name = createCampaignHttpRequest.Name});
+            var campaign = await _createCampaignRequestHandler.HandleRequest(new CreateCampaignRequest{Name = createCampaignHttpRequest.Name, UserId = createCampaignHttpRequest.UserId});
             return Ok(campaign);
         }
 

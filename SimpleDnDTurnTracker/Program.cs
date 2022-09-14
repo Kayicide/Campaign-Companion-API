@@ -44,6 +44,7 @@ if (app.Environment.IsDevelopment())
 app.UseInitDatabase();
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.Services.UseSimpleInjector(container);

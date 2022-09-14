@@ -7,6 +7,7 @@ namespace SimpleDnDTurnTracker.Features.Campaigns
     public class CreateCampaignRequest : IRequest
     {
         public string Name { get; set; }
+        public string UserId { get; set; }
     }
     public class CreateCampaignRequestHandler : IRequestHandler<CreateCampaignRequest, Campaign>
     {
@@ -17,7 +18,7 @@ namespace SimpleDnDTurnTracker.Features.Campaigns
         }
         public async Task<Campaign> HandleRequest(CreateCampaignRequest request)
         {
-            var campaign = new Campaign(request.Name);
+            var campaign = new Campaign(request.Name, request.UserId);
 
             var campaignAdded = await _campaignRepository.Add(campaign);
 

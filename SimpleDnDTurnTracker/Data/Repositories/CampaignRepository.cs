@@ -42,6 +42,12 @@ namespace SimpleDnDTurnTracker.Data.Repositories
             return campaigns;
         }
 
+        public Task<IQueryable<Campaign>> GetAllQueryable()
+        {
+            var campaigns = _context.Campaigns.AsQueryable();
+            return Task.FromResult(campaigns);
+        }
+
         public async Task<Campaign?> Update(Campaign entity)
         {
             var entityToUpdate = await _context.Campaigns.FindAsync(entity.Id);

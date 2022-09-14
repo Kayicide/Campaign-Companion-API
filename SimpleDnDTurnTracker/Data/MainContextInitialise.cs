@@ -17,7 +17,7 @@ namespace SimpleDnDTurnTracker.Data
 
             context.Encounters.Add(encounter);
 
-            var campaign = new Campaign("Campaign Test")
+            var campaign = new Campaign("Campaign Test", "126445452710248449")
             {
                 Encounters = new List<Encounter>
                 {

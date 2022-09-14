@@ -1,4 +1,5 @@
-﻿using SimpleDnDTurnTracker.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using SimpleDnDTurnTracker.Data.Entities;
 
 namespace SimpleDnDTurnTracker.Data.Repositories
 {
@@ -28,6 +29,11 @@ namespace SimpleDnDTurnTracker.Data.Repositories
         }
 
         public Task<List<Encounter>> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IQueryable<Encounter>> GetAllQueryable()
         {
             throw new NotImplementedException();
         }
