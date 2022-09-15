@@ -32,7 +32,12 @@ namespace SimpleDnDTurnTracker.Data.Repositories
 
         public async Task<Campaign?> Get(Guid id)
         {
-            var campaign = await _context.Campaigns.SingleOrDefaultAsync(x => x.Id == id);
+            var campaign = await _context.Campaigns.FindAsync(id);
+            if (campaign == null)
+                return null;
+
+            await _context.Entry(campaign).Collection(x => x.Encounters).LoadAsync();
+            
             return campaign;
         }
 
