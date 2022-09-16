@@ -7,6 +7,7 @@ namespace SimpleDnDTurnTracker.Features.Campaigns
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
     }
 
     public class UpdateCampaignRequestHandler : IRequestHandler<UpdateCampaignRequest, Campaign?>
@@ -18,7 +19,7 @@ namespace SimpleDnDTurnTracker.Features.Campaigns
         }
         public async Task<Campaign?> HandleRequest(UpdateCampaignRequest request)
         {
-            var campaign = new Campaign(request.Id, request.Name);
+            var campaign = new Campaign(request.Id, request.Name, request.Description);
 
             campaign = await _campaignRepository.Update(campaign);
 

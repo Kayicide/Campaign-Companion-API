@@ -60,6 +60,7 @@ namespace SimpleDnDTurnTracker.Data.Repositories
                 return null;
 
             entityToUpdate.Name = entity.Name;
+            entityToUpdate.Description = entity.Description;
 
             await _context.SaveChangesAsync();
 

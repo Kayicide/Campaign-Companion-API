@@ -56,10 +56,11 @@ namespace SimpleDnDTurnTracker.Controllers
             return Ok(campaign);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromQuery] Guid id, [FromBody]UpdateCampaignHttpRequest updateCampaignHttpRequest)
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody]UpdateCampaignHttpRequest updateCampaignHttpRequest)
         {
-            var campaign = await _updateCampaignRequestHandler.HandleRequest(new UpdateCampaignRequest{Id = id, Name = updateCampaignHttpRequest.Name});
+            var campaign = await _updateCampaignRequestHandler.HandleRequest(new UpdateCampaignRequest{Id = id, Name = updateCampaignHttpRequest.Name, Description = updateCampaignHttpRequest.Description});
             return Ok(campaign);
         }
     }

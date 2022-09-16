@@ -9,21 +9,17 @@
             Id = Guid.NewGuid();
             Name = name;
             CreatorId = creatorId;
+            Description = "A brand new campaign!";
         }
-        public Campaign(Guid id, string name, string creatorId)
+        public Campaign(Guid id, string name, string description)
         {
             Id = id;
             Name = name;
-            CreatorId = creatorId;
-        }
-        public Campaign(Guid id, string name)
-        {
-            Id = id;
-            Name = name;
-            CreatorId = "";
+            Description = description;
         }
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         public string CreatorId { get; set; }
         public List<Encounter>? Encounters { get; set; }
     }
