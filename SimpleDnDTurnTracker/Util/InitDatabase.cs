@@ -16,7 +16,6 @@ namespace SimpleDnDTurnTracker.Util
 
         public Task Invoke(HttpContext httpContext)
         {
-
             return _next(httpContext);
         }
     }

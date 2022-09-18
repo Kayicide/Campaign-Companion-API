@@ -27,6 +27,14 @@ namespace SimpleDnDTurnTracker.Data
 
             context.Campaigns.Add(campaign);
 
+            var user = new User
+            {
+                Id = new Guid("1704551b-0991-46e2-a924-fe4537ccfbe0"),
+                DiscordId = "126445452710248449"
+            };
+
+            context.Users.Add(user);
+
             context.SaveChanges();
         }
 
